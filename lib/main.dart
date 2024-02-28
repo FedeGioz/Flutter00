@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,9 +32,10 @@ class MyHomePage extends StatefulWidget{
 class _MyHomePage extends State<MyHomePage>{
   static const List<String> fields = ['3AINF', '4AINF', '5AINF'];
 
-  String nome = 'nome';
-  String cognome = 'cognome';
   String classe = fields.first;
+
+  TextEditingController ctrNome = TextEditingController();
+  TextEditingController ctrCognome = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +52,15 @@ class _MyHomePage extends State<MyHomePage>{
                 hintText: "Nome",
                 border: OutlineInputBorder(),
               ),
-          onChanged: (String? value){ nome = value!; },),
+          controller: ctrNome,),
           TextField(
               decoration: InputDecoration(
                 labelText: "Cognome",
                 hintText: "Cognome",
                 border: OutlineInputBorder(),
               ),
-          onChanged: (String? value){ cognome = value!; },),
+          controller: ctrCognome,
+          ),
           DropdownButton<String>(
               value: classe,
               // map visita la collezione e per ogni dato, ne crea una copia applicando su di esso il metodo o funzione lambda passata
@@ -75,7 +75,7 @@ class _MyHomePage extends State<MyHomePage>{
                   }
           ),
           ElevatedButton(
-              onPressed: () {  },
+              onPressed: () { print(ctrNome.text + " " + ctrCognome.text + " " + classe); },
               child: const Text("Clicca")
           )
         ],),
